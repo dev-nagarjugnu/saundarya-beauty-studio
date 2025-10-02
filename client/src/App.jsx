@@ -1221,13 +1221,18 @@ const VideoBg = styled.video`
   @media (max-width: 768px) {
     /* Ensure video covers properly on mobile */
     object-position: center center;
+    /* Reduce quality on mobile for faster loading */
+    filter: blur(0.5px); /* Slight blur to hide compression artifacts */
   }
   
-  /* Prevent video loading on very slow connections */
+  /* Hide video on very slow connections and show fallback */
   @media (max-width: 480px) and (max-resolution: 1.5dppx) {
-    /* On low-res mobile devices, consider showing a static image instead */
-    /* This can be implemented with a data attribute or conditional rendering */
+    display: none;
   }
+  
+  /* Performance optimizations */
+  will-change: transform; /* Optimize for animations */
+  transform: translateZ(0); /* Hardware acceleration */
 `;
 
 const Tint = styled.div`
@@ -1243,6 +1248,26 @@ const Tint = styled.div`
     rgba(0,0,0,0.3) 100%
   );
   z-index: -1;
+`;
+
+const VideoFallback = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    #667eea 0%,
+    #764ba2 50%,
+    #f093fb 100%
+  );
+  z-index: -3;
+  
+  /* Show fallback when video is hidden on slow connections */
+  @media (max-width: 480px) and (max-resolution: 1.5dppx) {
+    z-index: -2;
+  }
 `;
 
 const HeroContent = styled.div`
@@ -1703,6 +1728,9 @@ export default function App() {
 
       {/* Hero Section */}
       <Hero>
+        {/* Fallback Background for Fast Loading */}
+        <VideoFallback />
+        
         {/* Video Background */}
         <VideoBg
           ref={videoRef}
@@ -1710,8 +1738,9 @@ export default function App() {
           muted={isVideoMuted}
           loop
           playsInline
-          preload="metadata" /* Faster loading on mobile */
+          preload="none" /* Don't preload on mobile for faster initial load */
           poster="" /* Add a poster image for better loading experience */
+          loading="lazy" /* Lazy load the video */
         >
           <source src={heroVideo} type="video/mp4" />
           Your browser does not support the video tag.
