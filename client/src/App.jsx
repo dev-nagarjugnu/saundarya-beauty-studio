@@ -608,90 +608,27 @@ const Chip = styled.button`
 `;
 /* Removed right-side media preview */
 const LoginBtn = styled.button`
-  padding: 12px 28px; 
-  border-radius: var(--radius-xl);
-  background: linear-gradient(135deg, rgba(0, 122, 255, 0.15) 0%, rgba(88, 86, 214, 0.12) 100%);
-  backdrop-filter: saturate(1.8) blur(20px);
-  -webkit-backdrop-filter: saturate(1.8) blur(20px);
-  border: 1px solid rgba(0, 122, 255, 0.25);
-  color: #007AFF; 
+  padding: 10px 18px; 
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  border: 1px solid rgba(0,0,0,0.04);
+  color: #ffffff; 
   font-weight: 600;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: -0.01em;
-  box-shadow: 0 8px 32px rgba(0, 122, 255, 0.15);
+  box-shadow: 0 8px 24px rgba(212,175,55,.22), 0 2px 8px rgba(0,0,0,.12);
   position: relative;
   overflow: hidden;
   flex-shrink: 0;
   white-space: nowrap;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Premium glass effect overlay with blue tint */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 122, 255, 0.08) 0%, rgba(88, 86, 214, 0.05) 100%);
-    border-radius: var(--radius-xl);
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-  }
-  /* Premium shimmer effect */
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  transition: transform .18s ease, box-shadow .18s ease;
   &:hover{ 
-    background: linear-gradient(135deg, rgba(0, 122, 255, 0.25) 0%, rgba(88, 86, 214, 0.18) 100%);
-    border-color: rgba(0, 122, 255, 0.4);
-    box-shadow: 0 12px 40px rgba(0, 122, 255, 0.25);
-    transform: translateY(-2px);
-    color: #0056CC;
-    &::before {
-      opacity: 1;
-    }
-    &::after {
-      left: 100%;
-    }
+    transform: translateY(-1px);
+    box-shadow: 0 14px 40px rgba(212,175,55,.28), 0 3px 10px rgba(0,0,0,.14);
   }
   &:active{ 
-    transform: translateY(0) scale(0.98);
-    box-shadow: 0 6px 24px rgba(0, 122, 255, 0.2);
-    background: linear-gradient(135deg, rgba(0, 122, 255, 0.2) 0%, rgba(88, 86, 214, 0.15) 100%);
-  }
-  /* Focus state for accessibility */
-  &:focus-visible {
-    outline: 2px solid rgba(0, 122, 255, 0.8);
-    outline-offset: 2px;
-  }
-  /* Mobile adjustments */
-  @media (max-width: 920px) {
-    display: none; /* Hide on mobile - will be in mobile menu */
-  }
-  @media (max-width: 768px) {
-    padding: 10px 24px;
-    font-size: 14px;
-  }
-  @media (max-width: 480px) {
-    padding: 8px 20px;
-    font-size: 13px;
-  }
-  /* Touch device optimizations */
-  @media (hover: none) and (pointer: coarse) {
-    &:hover {
-      transform: none;
-    }
-    &:active {
-      background: linear-gradient(135deg, rgba(0, 122, 255, 0.3) 0%, rgba(88, 86, 214, 0.2) 100%);
-      transform: scale(0.98);
-    }
+    transform: translateY(0);
+    box-shadow: 0 6px 18px rgba(212,175,55,.22);
   }
 `;
 const MobileActions = styled.div`
@@ -1671,7 +1608,7 @@ const videoTestimonials = [
     category: "bridal"
   }
 ];
-const VideoTestimonialsSection = () => {
+const LegacyVideoTestimonialsSection = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(null);
   const [hoveredId, setHoveredId] = useState(null);
   const openModal = (testimonial) => {
@@ -2681,8 +2618,8 @@ const AchievementDescription = styled.p`
     max-width: 160px;
   }
 `;
-// Premium Services Section Styles
-const ServicesSection = styled.section`
+// Premium Services Section Styles (legacy)
+const LegacyServicesSectionStyles = styled.section`
   padding: 120px 0;
   background: #f8f9fa;
   position: relative;
@@ -5336,6 +5273,8 @@ const FooterSocialLink = styled.a`
   }
 `;
 
+// Shortcuts legacy styled components removed
+
 function useInViewOnce(ref) {
   const [inView, setInView] = useState(false);
   useEffect(() => {
@@ -5590,6 +5529,771 @@ const BannersSection = () => {
     </section>
   );
 };
+
+// New Benefits Section (legacy) — will not be used now but kept above for future reuse
+const BenefitsSectionWrap = styled.section`
+  position: relative;
+  padding: 96px 16px;
+  background: linear-gradient(180deg, #f7f2fb 0%, #faf5ef 100%);
+`;
+
+const BenefitsContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const BenefitsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const BenefitCard = styled.div`
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 24px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 220px;
+`;
+
+const CardHeadline = styled.h3`
+  margin: 0;
+  font-size: clamp(18px, 2.4vw, 24px);
+  line-height: 1.2;
+  color: #111827;
+`;
+
+const CardBody = styled.p`
+  margin: 0;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.6;
+`;
+
+const Illustration = styled.div`
+  flex: 1;
+  border-radius: 16px;
+  background: #f4f6f8;
+  border: 1px dashed #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  font-size: 14px;
+`;
+
+const MiniCard = styled.div`
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 12px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+`;
+
+const BenefitsSection = () => {
+  return (
+    <BenefitsSectionWrap>
+      <BenefitsContainer>
+        <BenefitsGrid>
+          {/* Top row - two wide cards */}
+          <BenefitCard style={{ gridColumn: 'span 6' }}>
+            <Illustration style={{ height: 160 }}>
+              Browser Mockup Placeholder
+            </Illustration>
+            <CardHeadline>Beauty services live in your browser</CardHeadline>
+            <CardBody>
+              Book premium at-home salon services from any device—Saundarya meets you wherever you browse.
+            </CardBody>
+          </BenefitCard>
+          <BenefitCard style={{ gridColumn: 'span 6', position: 'relative' }}>
+            <CardHeadline>Automatically find offers and apply coupons</CardHeadline>
+            <CardBody>
+              We surface the best applicable promos at checkout so you always get the best value.
+            </CardBody>
+            <div style={{ marginTop: '8px' }}>
+              <MiniCard>
+                <span style={{ fontWeight: 700 }}>Saundarya</span>
+                <span style={{ color: '#6b7280', fontSize: 12 }}>Promo code</span>
+                <span style={{ marginLeft: 'auto', fontWeight: 600, color: '#7c3aed' }}>APPLY</span>
+              </MiniCard>
+            </div>
+          </BenefitCard>
+
+          {/* Bottom row - three equal cards */}
+          <BenefitCard style={{ gridColumn: 'span 4' }}>
+            <CardHeadline>Finds and compares the best packages</CardHeadline>
+            <CardBody>
+              Instantly compare prices across services and timings to choose what suits you best.
+            </CardBody>
+            <Illustration style={{ height: 120 }}>Deal Cards Placeholder</Illustration>
+          </BenefitCard>
+          <BenefitCard style={{ gridColumn: 'span 4' }}>
+            <CardHeadline>Helps you plan your next appointment</CardHeadline>
+            <CardBody>
+              Save treatments to your list and schedule when it's convenient—without losing track.
+            </CardBody>
+            <Illustration style={{ height: 120 }}>Saved Item Placeholder</Illustration>
+          </BenefitCard>
+          <BenefitCard style={{ gridColumn: 'span 4' }}>
+            <CardHeadline>Book at the right time</CardHeadline>
+            <CardBody>
+              Get alerts for limited-time offers and slots so you book at the perfect moment.
+            </CardBody>
+            <Illustration style={{ height: 120 }}>Price Drop Badge Placeholder</Illustration>
+          </BenefitCard>
+        </BenefitsGrid>
+      </BenefitsContainer>
+    </BenefitsSectionWrap>
+  );
+};
+
+// Services Section (premium UrbanCompany-like)
+const SvcSectionWrap = styled.section`
+  padding: 96px 16px;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+`;
+const SvcContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+const SvcHeader = styled.div`
+  text-align: center;
+  margin-bottom: 32px;
+`;
+const SvcTitle = styled.h2`
+  margin: 0 0 8px 0;
+  font-size: clamp(28px, 4vw, 44px);
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+const SvcSub = styled.p`
+  margin: 0;
+  font-size: 16px;
+  color: #6b7280;
+`;
+const SvcGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 24px;
+  @media (max-width: 1024px){ grid-template-columns: repeat(8,1fr); }
+  @media (max-width: 768px){ grid-template-columns: repeat(4,1fr); }
+`;
+const SvcCard = styled.a`
+  grid-column: span 3;
+  display: grid;
+  background: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 0 8px 20px rgba(0,0,0,.06);
+  &:hover{ transform: translateY(-4px); box-shadow: 0 18px 44px rgba(0,0,0,.10); }
+  position: relative;
+  isolation: isolate;
+`;
+const SvcImg = styled.div`
+  height: 180px;
+  background: #f3f4f6;
+  position: relative;
+  overflow: hidden;
+`;
+const SvcBody = styled.div`
+  padding: 18px 18px 22px;
+  display: grid;
+  gap: 8px;
+`;
+const SvcItemTitle = styled.h4`
+  margin: 0;
+  font-size: 18px;
+`;
+const SvcDesc = styled.p`
+  margin: 0;
+  color: #6b7280;
+  font-size: 14px;
+  line-height: 1.6;
+`;
+
+// Mobile persistent CTA for accessibility (no hover on touch)
+const SvcMobileCTA = styled.a`
+  display: none;
+  margin: 12px 18px 18px;
+  background: #111827;
+  color: #fff;
+  text-align: center;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-weight: 600;
+  @media (max-width: 768px){ display: block; }
+`;
+
+// CTA overlay
+const SvcOverlay = styled.div`
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, rgba(17,24,39,0) 30%, rgba(17,24,39,0.55) 100%);
+  opacity: 0;
+  transition: opacity .2s ease;
+  pointer-events: none;
+  ${SvcCard}:hover & { opacity: 1; pointer-events: auto; }
+`;
+const SvcCTA = styled.span`
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(42,74,58,.35);
+  transform: translateY(8px);
+  transition: transform .18s ease;
+  ${SvcCard}:hover & { transform: translateY(0); }
+`;
+
+const ServicesSection = () => {
+  const cards = [
+    { title: "Women's salon at home", desc: 'Complete salon services delivered to your doorstep with professional care' },
+    { title: "Women's spa at home", desc: 'Relaxing spa therapies delivered in your comfort zone' },
+    { title: 'Bridal services at home', desc: 'Makeover packages curated for your wedding day' },
+    { title: 'Pre-bridal services', desc: 'Treatments to prepare you for the big day' },
+    { title: 'Mehndi services', desc: 'Beautiful henna designs by expert artists' },
+    { title: 'Hair services at home', desc: 'Cutting, styling, coloring, and care at home' },
+    { title: 'Makeup services at home', desc: 'Professional makeup for all occasions' },
+    { title: 'Skin & body treatments', desc: 'Rejuvenating skin and body care in your space' },
+  ];
+  return (
+    <SvcSectionWrap>
+      <SvcContainer>
+        <SvcHeader>
+          <SvcTitle>Our Services</SvcTitle>
+          <SvcSub>
+            Experience premium beauty and wellness services at your doorstep with our professional home service packages
+          </SvcSub>
+        </SvcHeader>
+        <SvcGrid>
+          {cards.map((c, i) => (
+            <SvcCard key={i} href="#book">
+              <SvcImg>
+                <SvcOverlay>
+                  <SvcCTA>Book your service</SvcCTA>
+                </SvcOverlay>
+              </SvcImg>
+              <SvcBody>
+                <SvcItemTitle>{c.title}</SvcItemTitle>
+                <SvcDesc>{c.desc}</SvcDesc>
+              </SvcBody>
+              <SvcMobileCTA href="#book">Book your service</SvcMobileCTA>
+            </SvcCard>
+          ))}
+        </SvcGrid>
+      </SvcContainer>
+    </SvcSectionWrap>
+  );
+};
+
+// Premium How It Works Section (elegant, responsive)
+const HowWrap = styled.section`
+  padding: 96px 16px 80px;
+  background: linear-gradient(180deg,#ffffff 0%, #fbf9f4 100%);
+`;
+const HowContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+const HowHeader = styled.div`
+  text-align: center;
+  margin-bottom: 36px;
+`;
+const HowTitle = styled.h2`
+  margin: 0 0 8px 0;
+  font-size: clamp(28px, 4vw, 44px);
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+const HowSub = styled.p`
+  margin: 0;
+  color: #6b7280;
+`;
+const HowGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  @media (max-width: 1024px){ grid-template-columns: repeat(8,1fr); }
+  @media (max-width: 768px){ grid-template-columns: repeat(4,1fr); }
+`;
+const HowCard = styled.div`
+  grid-column: span 3;
+  background: #ffffff;
+  border: 1px solid #eef0f3;
+  border-radius: 20px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.08);
+  overflow: hidden;
+  transition: transform .18s ease, box-shadow .18s ease;
+  &:hover{ transform: translateY(-4px); box-shadow: 0 18px 50px rgba(0,0,0,.12); }
+`;
+const HowImg = styled.div`
+  height: 160px;
+  background: #f3f4f6;
+`;
+const HowBody = styled.div`
+  padding: 16px 18px 20px;
+`;
+const HowStep = styled.div`
+  width: 44px; height: 44px; border-radius: 999px;
+  background: linear-gradient(90deg,#2A4A3A,#D4AF37);
+  color: #fff; display: grid; place-items: center; font-weight: 700;
+  box-shadow: 0 6px 16px rgba(42,74,58,.35);
+  margin: -22px 0 10px 18px;
+`;
+const HowTitleSmall = styled.h4`
+  margin: 0 0 6px 0; font-size: 18px;
+`;
+const HowDesc = styled.p`
+  margin: 0; color: #6b7280; font-size: 14px; line-height: 1.6;
+`;
+
+const HowCTAWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+`;
+const HowCTA = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  box-shadow: 0 10px 24px rgba(42,74,58,.25);
+  transition: transform .18s ease, box-shadow .18s ease;
+  &:hover { transform: translateY(-2px); box-shadow: 0 16px 36px rgba(42,74,58,.3); }
+`;
+
+const HowItWorksPremium = () => {
+  const items = [
+    { step: 1, title: 'Select Location', desc: 'Choose your preferred area so we can reach you.' },
+    { step: 2, title: 'Choose Services', desc: 'Pick from curated premium beauty and wellness services.' },
+    { step: 3, title: 'Pick Slot', desc: 'Select a convenient time that fits your schedule.' },
+    { step: 4, title: 'Relax & Enjoy', desc: 'Our experts arrive with premium products—sit back and glow.' },
+  ];
+  return (
+    <HowWrap>
+      <HowContainer>
+        <HowHeader>
+          <HowTitle>How Does It Work?</HowTitle>
+          <HowSub>Getting your perfect beauty treatment is as easy as 1‑2‑3‑4</HowSub>
+        </HowHeader>
+        <HowGrid>
+          {items.map((it, i) => (
+            <HowCard key={i}>
+              <HowImg />
+              <HowBody>
+                <HowStep>{it.step}</HowStep>
+                <HowTitleSmall>{it.title}</HowTitleSmall>
+                <HowDesc>{it.desc}</HowDesc>
+              </HowBody>
+            </HowCard>
+          ))}
+        </HowGrid>
+        <HowCTAWrap>
+          <HowCTA href="#book">Start your Journey</HowCTA>
+        </HowCTAWrap>
+      </HowContainer>
+    </HowWrap>
+  );
+};
+
+// Premium Video Testimonials Section
+const VidsWrap = styled.section`
+  padding: 96px 16px;
+  background: linear-gradient(180deg,#ffffff 0%, #f7fafc 100%);
+`;
+const VidsContainer = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+const VidsHeader = styled.div`
+  text-align: center; margin-bottom: 28px;
+`;
+const VidsTitle = styled.h2`
+  margin: 0 0 8px 0;
+  font-size: clamp(28px, 4vw, 44px);
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+`;
+const VidsSub = styled.p`
+  margin: 0; color: #6b7280;
+`;
+const VidsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+  @media (max-width: 1024px){ grid-template-columns: repeat(8,1fr); }
+  @media (max-width: 768px){ grid-template-columns: repeat(4,1fr); }
+`;
+const VidCard = styled.div`
+  grid-column: span 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #0f172a;
+  box-shadow: 0 12px 36px rgba(0,0,0,.18);
+  position: relative;
+`;
+const VidThumb = styled.div`
+  height: 220px; background: #111827; position: relative;
+`;
+const VidOverlay = styled.div`
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,.5) 100%);
+`;
+const PlayButton = styled.button`
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
+  width: 64px; height: 64px; border-radius: 999px; border: none; cursor: pointer;
+  display: grid; place-items: center;
+  color: #1f2937; background: #ffffff;
+  box-shadow: 0 10px 28px rgba(0,0,0,.25);
+  transition: transform .18s ease, box-shadow .18s ease;
+  &:hover{ transform: translate(-50%,-52%); box-shadow: 0 16px 40px rgba(0,0,0,.3);} 
+`;
+const VidBody = styled.div`
+  padding: 14px 16px; color: #e5e7eb;
+`;
+const VidTitle = styled.div`
+  font-weight: 600; margin-bottom: 4px; color: #ffffff;
+`;
+const VidMeta = styled.div`
+  font-size: 12px; color: #9ca3af;
+`;
+
+const VideoTestimonialsSection = () => {
+  const vids = [
+    { title: "Neha's Bridal Transformation", meta: '2:34 • Bridal', src: '' },
+    { title: 'Home Spa Experience', meta: '1:45 • Spa', src: '' },
+    { title: 'Hair Styling at Home', meta: '3:12 • Salon', src: '' },
+    { title: 'Pre‑Bridal Glow Journey', meta: '4:28 • Bridal', src: '' },
+  ];
+  return (
+    <VidsWrap>
+      <VidsContainer>
+        <VidsHeader>
+          <VidsTitle>Client Stories</VidsTitle>
+          <VidsSub>Hear what our clients have to say about their transformation journey with us</VidsSub>
+        </VidsHeader>
+        <VidsGrid>
+          {vids.map((v, i) => (
+            <VidCard key={i}>
+              <VidThumb>
+                <VidOverlay />
+                <PlayButton aria-label={`Play ${v.title}`}>
+                  ▶
+                </PlayButton>
+              </VidThumb>
+              <VidBody>
+                <VidTitle>{v.title}</VidTitle>
+                <VidMeta>{v.meta}</VidMeta>
+              </VidBody>
+            </VidCard>
+          ))}
+        </VidsGrid>
+      </VidsContainer>
+    </VidsWrap>
+  );
+};
+
+// Premium CTA Section
+const CTAWrap = styled.section`
+  padding: 80px 16px 96px;
+  background: #ffffff;
+`;
+const CTAContainer = styled.div`
+  max-width: 1200px; margin: 0 auto;
+`;
+const CTACard = styled.div`
+  position: relative; border-radius: 0;
+  padding: 48px 24px 64px; text-align: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+`;
+// Decorative orbs removed for a calmer look
+const CTAHeadline = styled.h2`
+  margin: 0 0 10px 0;
+  font-size: clamp(28px,4.2vw,48px);
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+const CTASub = styled.p`
+  margin: 0 0 22px 0;
+  color: #6b7280;
+  font-size: clamp(14px,1.8vw,15px);
+  line-height: 1.7;
+  font-weight: 400;
+`;
+const CTAActions = styled.div`
+  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 8px;
+`;
+const CTAButtonPrimary = styled.a`
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  padding: 12px 22px; border-radius: 999px; font-weight: 600; letter-spacing: -0.01em;
+  color: #ffffff; border: 1px solid rgba(0,0,0,0.04);
+  background: linear-gradient(90deg, #2A4A3A, #D4AF37);
+  box-shadow: 0 10px 28px rgba(212,175,55,.25), 0 2px 8px rgba(0,0,0,.12);
+  transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+  &:hover{ transform: translateY(-1px); box-shadow: 0 16px 42px rgba(212,175,55,.32), 0 3px 10px rgba(0,0,0,.14); }
+  &:focus-visible{ outline: 0; box-shadow: 0 0 0 3px rgba(212,175,55,.45), 0 10px 28px rgba(212,175,55,.25); }
+`;
+const CTAButtonGhost = styled.a`
+  display: inline-flex; align-items: center; gap: 10px; text-decoration: none;
+  padding: 12px 20px; border-radius: 999px; font-weight: 600; letter-spacing: -0.01em;
+  color: #2A4A3A; background: #ffffff; border: 1px solid rgba(42,74,58,.28);
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+  &:hover{ background: rgba(42,74,58,.06); border-color: rgba(42,74,58,.4); }
+  &:focus-visible{ outline: 0; box-shadow: 0 0 0 3px rgba(42,74,58,.25); }
+`;
+// Overlapping, staggered faces (flex + negative margins)
+const CTAOverlapRow = styled.div`
+  margin-top: 28px; display: flex; justify-content: center; align-items: center;
+  height: 200px; /* gives room for rotation */
+`;
+const OverlapCard = styled.div`
+  position: relative; border-radius: 22px; overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0,0,0,.12), 0 6px 16px rgba(0,0,0,.06);
+  transform: rotate(var(--rot)); z-index: var(--z);
+  background: var(--bg, #ffffff); padding: var(--pad, 0px);
+  border: none;
+  width: var(--w); height: var(--h);
+`;
+const OverlapImg = styled.img`
+  width: 100%; height: 100%; object-fit: cover; border-radius: 16px; display: block;
+`;
+
+const CallToActionPremium = () => {
+  return (
+    <CTAWrap>
+      <CTAContainer>
+        <CTACard>
+          <CTAHeadline>Build and Ship Your Beauty Faster</CTAHeadline>
+          <CTASub>High‑quality, customizable at‑home services with a premium experience.</CTASub>
+          <CTAActions>
+            <CTAButtonPrimary href="#book">Start your Journey</CTAButtonPrimary>
+            <CTAButtonGhost href="#learn">Learn more</CTAButtonGhost>
+          </CTAActions>
+          <CTAOverlapRow>
+            {/* Image 1 - smallest, far left, behind */}
+            <OverlapCard style={{ ['--w']: '96px', ['--h']: '96px', ['--rot']: '-15deg', ['--z']: 1, ['--bg']: '#ffffff', marginLeft: '0' }}>
+              <OverlapImg loading="lazy" src="/avatar-1.jpg" alt="User 1" />
+            </OverlapCard>
+            {/* Image 2 - medium, left of center, behind center */}
+            <OverlapCard style={{ ['--w']: '140px', ['--h']: '140px', ['--rot']: '7deg', ['--z']: 2, ['--bg']: '#D4AF37', marginLeft: '-12px' }}>
+              <OverlapImg loading="lazy" src="/avatar-2.jpg" alt="User 2" />
+            </OverlapCard>
+            {/* Image 3 - largest, top layer */}
+            <OverlapCard style={{ ['--w']: '220px', ['--h']: '220px', ['--rot']: '-3deg', ['--z']: 3, ['--bg']: '#1f2937', marginLeft: '-18px' }}>
+              <OverlapImg loading="lazy" src="/avatar-3.jpg" alt="User 3" />
+            </OverlapCard>
+            {/* Image 4 - medium, right of center, behind center */}
+            <OverlapCard style={{ ['--w']: '140px', ['--h']: '140px', ['--rot']: '-10deg', ['--z']: 2, ['--bg']: '#f3f4f6', marginLeft: '-18px' }}>
+              <OverlapImg loading="lazy" src="/avatar-4.webp" alt="User 4" />
+            </OverlapCard>
+            {/* Image 5 - smallest, far right, behind */}
+            <OverlapCard style={{ ['--w']: '96px', ['--h']: '96px', ['--rot']: '15deg', ['--z']: 1, ['--bg']: '#2A4A3A', marginLeft: '-12px' }}>
+              <OverlapImg loading="lazy" src="/avatar-5.jpeg" alt="User 5" />
+            </OverlapCard>
+          </CTAOverlapRow>
+        </CTACard>
+      </CTAContainer>
+    </CTAWrap>
+  );
+};
+// Premium Written Testimonials Section
+const WTWrap = styled.section`
+  padding: 96px 16px;
+  background: linear-gradient(180deg,#ffffff 0%, #fbf7ff 100%);
+`;
+const WTContainer = styled.div`
+  max-width: 1200px; margin: 0 auto;
+`;
+const WTHeader = styled.div`
+  text-align: center; margin-bottom: 28px;
+`;
+const WTTitle = styled.h2`
+  margin: 0 0 8px 0; font-size: clamp(28px,4vw,44px);
+  background: linear-gradient(90deg,#2A4A3A,#D4AF37);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+`;
+const WTSub = styled.p`
+  margin: 0; color: #6b7280;
+`;
+const WTTracks = styled.div`
+  display: grid; gap: 16px;
+`;
+const WTTrack = styled.div`
+  overflow: hidden; position: relative;
+  &:hover ${/* pause both marquees on hover */''}WTMarquee,
+  &:hover WTMarqueeRev {
+    animation-play-state: paused;
+  }
+`;
+const WTMarquee = styled.div`
+  display: inline-flex; gap: 16px; padding: 4px 0;
+  will-change: transform;
+  animation: scrollX var(--dur, 35s) linear infinite;
+  @keyframes scrollX {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+`;
+const WTMarqueeRev = styled(WTMarquee)`
+  animation-direction: reverse;
+`;
+const WTCard = styled.div`
+  width: 520px; max-width: 90vw; flex: 0 0 auto;
+  position: relative; border-radius: 22px;
+  background: #ffffff; border: 1px solid #eef0f3;
+  padding: 20px; box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  overflow: hidden;
+  &::after{
+    content: '';
+    position: absolute; left: 0; right: 0; bottom: 0; height: 10px;
+    background: linear-gradient(90deg, var(--from, #2A4A3A), var(--to, #D4AF37));
+    opacity: 0; transition: opacity .18s ease;
+  }
+  &:hover::after{ opacity: 1; }
+`;
+const WTQuote = styled.div`
+  position: absolute; right: 16px; top: 16px; color: #e9d5ff; font-size: 28px; font-weight: 700;
+`;
+const WTRating = styled.div`
+  color: #f59e0b; margin-bottom: 10px; font-size: 16px; letter-spacing: 1px;
+`;
+const WTText = styled.p`
+  margin: 0 0 16px 0; color: #374151; line-height: 1.7;
+`;
+const WTAuthor = styled.div`
+  display: flex; align-items: center; gap: 12px;
+`;
+const WTTag = styled.span`
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; color: #1f2937;
+  background: linear-gradient(135deg, var(--from, #e5f3ec), var(--to, #fbf4de));
+  border-radius: 999px; padding: 6px 10px; margin-top: 10px;
+`;
+const WTAvatar = styled.div`
+  width: 40px; height: 40px; border-radius: 999px; background: #e5e7eb; overflow: hidden;
+`;
+const WTMeta = styled.div`
+  display: grid; gap: 2px; font-size: 12px; color: #6b7280;
+`;
+const WTName = styled.div`
+  font-weight: 600; color: #111827; font-size: 14px;
+`;
+
+const WrittenTestimonialsPremium = () => {
+  const rowA = [
+    { name: 'Ritu Agarwal', tag: '#Facial & Spa', ago: '1m ago', text: "My skin has never looked better! The relaxing atmosphere and expert care make every visit delightful.", rating: 5 },
+    { name: 'Sunita Kapoor', tag: '#Hair Styling', ago: '3w ago', text: "Amazing hair transformation! Beyond expectations with the perfect cut and color.", rating: 5 },
+    { name: 'Meera Joshi', tag: '#Bridal Package', ago: '2m ago', text: "Best decision for my bridal package! Everything was flawless.", rating: 5 },
+    { name: 'Divya Patel', tag: '#Regular Client', ago: '5d ago', text: "Consistent quality every time. The staff treats you like family.", rating: 5 },
+    { name: 'Pooja Sharma', tag: '#Nail Art', ago: '1w ago', text: "Nail art designs are creative and beautiful. Incredible detail!", rating: 5 },
+  ];
+  const rowB = [
+    { name: 'Aisha Khan', tag: '#Makeup', ago: '4w ago', text: "Loved my party makeup—classy and long‑lasting.", rating: 5 },
+    { name: 'Rhea Sen', tag: '#Spa Luxe', ago: '2w ago', text: "Home spa was soothing and professional. Five stars!", rating: 5 },
+    { name: 'Anita Verma', tag: '#Pre‑Bridal', ago: '6w ago', text: "Pre‑bridal routine made a visible difference.", rating: 5 },
+    { name: 'Kritika Rao', tag: '#Hair Color', ago: '9d ago', text: "Perfect shade and zero damage. Highly recommended.", rating: 5 },
+    { name: 'Mitali Das', tag: '#Cleanup', ago: '3w ago', text: "Cleanup left my skin fresh and glowing.", rating: 5 },
+  ];
+  // Duplicate to reach ~10 per layer for seamless looping
+  const trackTop = [...rowA, ...rowA];
+  const trackBottom = [...rowB, ...rowB];
+  const palettes = [
+    ['#2A4A3A','#D4AF37'],
+    ['#1E3A34','#B68C2C'],
+    ['#0F3D3E','#A47C1B'],
+    ['#275D52','#D0B36E'],
+    ['#1B4332','#C9A227'],
+  ];
+  return (
+    <WTWrap>
+      <WTContainer>
+        <WTHeader>
+          <WTTitle>What Our Clients Say</WTTitle>
+          <WTSub>Read the beautiful experiences shared by our valued clients</WTSub>
+        </WTHeader>
+        <WTTracks>
+          <WTTrack>
+            <WTMarquee style={{ ['--dur']: '36s' }}>
+              {trackTop.map((t, i) => (
+                <WTCard key={`t${i}`} style={{ ['--from']: palettes[i % palettes.length][0], ['--to']: palettes[i % palettes.length][1] }}>
+                    <WTQuote>”</WTQuote>
+                    <WTRating>{'★★★★★'.slice(0, t.rating)}</WTRating>
+                    <WTText>“{t.text}”</WTText>
+                    <WTTag style={{ ['--from']: palettes[i % palettes.length][0] + '22', ['--to']: palettes[i % palettes.length][1] + '22' }}>{t.tag}</WTTag>
+                    <WTAuthor>
+                      <WTAvatar />
+                      <WTMeta>
+                        <WTName>{t.name}</WTName>
+                        <div>{t.ago}</div>
+                      </WTMeta>
+                    </WTAuthor>
+                </WTCard>
+              ))}
+            </WTMarquee>
+          </WTTrack>
+          <WTTrack>
+            <WTMarqueeRev style={{ ['--dur']: '32s' }}>
+              {trackBottom.map((t, i) => (
+                <WTCard key={`b${i}`} style={{ ['--from']: palettes[(i+1) % palettes.length][0], ['--to']: palettes[(i+1) % palettes.length][1] }}>
+                    <WTQuote>”</WTQuote>
+                    <WTRating>{'★★★★★'.slice(0, t.rating)}</WTRating>
+                    <WTText>“{t.text}”</WTText>
+                    <WTTag style={{ ['--from']: palettes[(i+1) % palettes.length][0] + '22', ['--to']: palettes[(i+1) % palettes.length][1] + '22' }}>{t.tag}</WTTag>
+                    <WTAuthor>
+                      <WTAvatar />
+                      <WTMeta>
+                        <WTName>{t.name}</WTName>
+                        <div>{t.ago}</div>
+                      </WTMeta>
+                    </WTAuthor>
+                </WTCard>
+              ))}
+            </WTMarqueeRev>
+          </WTTrack>
+        </WTTracks>
+      </WTContainer>
+    </WTWrap>
+  );
+};
+
+// (Removed legacy Rail, Shortcuts and Promo components to avoid conflicts)
 export default function App() {
   const heroStackRef = useRef(null);
   const heroIn = useInViewOnce(heroStackRef);
@@ -5775,250 +6479,19 @@ export default function App() {
           )}
         </AudioToggleBtn>
       </Hero>
-      {/* Achievements Section */}
-      <AchievementSection />
       {/* Our Services Section */}
-      <PremiumServicesSection />
-      {/* Video Testimonials Section */}
+      <ServicesSection />
+      <HowItWorksPremium />
       <VideoTestimonialsSection />
-      {/* Written Testimonials Section */}
-      <TestimonialsSection />
-      {/* Banners Section */}
-      <BannersSection />
-      {/* Media Coverage Section */}
-      <MediaCoverageSection>
-        <MediaCoverageContainer>
-          <MediaCoverageHeader>
-            <MediaCoverageTitle>
-              <span className="gradient-text">Media</span> Coverage
-            </MediaCoverageTitle>
-            <MediaCoverageSubtitle>
-              See what the media is saying about our exceptional beauty services and customer satisfaction
-            </MediaCoverageSubtitle>
-          </MediaCoverageHeader>
-          <MediaCoverageGrid>
-            <MediaCard className="featured">
-              <MediaHeader>
-                <MediaMasthead>THE BEAUTY TIMES</MediaMasthead>
-                <MediaEdition>Mumbai Edition • Today</MediaEdition>
-              </MediaHeader>
-              <MediaContent>
-                <MediaHeadline>Saundarya Beauty Salon: Setting New Standards in Beauty Care</MediaHeadline>
-                <MediaBody>
-                  <MediaParagraph>
-                    Local beauty salon receives outstanding reviews for exceptional service quality and customer satisfaction. 
-                    Clients praise professional staff and luxurious treatments.
-                  </MediaParagraph>
-                  <MediaQuote>
-                    "The attention to detail and personalized care is unmatched," says regular customer. 
-                    Hygiene standards and premium products make this salon a top choice.
-                  </MediaQuote>
-                  <MediaParagraph>
-                    Award-winning services including bridal packages, spa treatments, and cutting-edge beauty solutions 
-                    continue to attract discerning clients from across the city.
-                  </MediaParagraph>
-                </MediaBody>
-              </MediaContent>
-            </MediaCard>
-            <MediaCard>
-              <MediaHeader>
-                <MediaMasthead>BEAUTY WEEKLY</MediaMasthead>
-                <MediaEdition>Delhi Edition • Yesterday</MediaEdition>
-              </MediaHeader>
-              <MediaContent>
-                <MediaHeadline>Home Beauty Services Revolution: Saundarya Leads the Way</MediaHeadline>
-                <MediaBody>
-                  <MediaParagraph>
-                    Mobile beauty services are transforming the industry, bringing salon-quality treatments directly to customers' homes. 
-                    Leading salons like Saundarya are pioneering this innovative approach.
-                  </MediaParagraph>
-                  <MediaQuote>
-                    "The convenience of home beauty services without compromising on quality is revolutionary," notes industry expert. 
-                    Time busy moms and professionals particularly favor this flexible approach.
-                  </MediaQuote>
-                </MediaBody>
-              </MediaContent>
-            </MediaCard>
-            <MediaCard>
-              <MediaHeader>
-                <MediaMasthead>GLAMOUR MAGAZINE</MediaMasthead>
-                <MediaEdition>National Edition • Last Week</MediaEdition>
-              </MediaHeader>
-              <MediaContent>
-                <MediaHeadline>Beauty Industry Trends: Premium Services Drive Growth</MediaHeadline>
-                <MediaBody>
-                  <MediaParagraph>
-                    The beauty industry continues to evolve with customers seeking premium, personalized experiences. 
-                    Established salons adapt by offering innovative treatments and exceptional service quality.
-                  </MediaParagraph>
-                  <MediaQuote>
-                    "Consumer preference is shifting towards high-quality services that offer both results and relaxation," 
-                    observes industry analyst. Premium positioning and skilled professionals make all the difference.
-                  </MediaQuote>
-                </MediaBody>
-              </MediaContent>
-            </MediaCard>
-          </MediaCoverageGrid>
-        </MediaCoverageContainer>
-      </MediaCoverageSection>
-      {/* How Does It Works Section */}
-      <HowItWorksSection>
-        <HowItWorksContainer>
-          <HowItWorksHeader>
-            <HowItWorksTitle>
-              How Does It Work?
-            </HowItWorksTitle>
-            <HowItWorksSubtitle>
-              Experience our premium beauty services in just 4 simple steps
-            </HowItWorksSubtitle>
-          </HowItWorksHeader>
-          <HowItWorksGrid>
-            <HowItWorksStep>
-              <HowItWorksStepNumber>01</HowItWorksStepNumber>
-              <HowItWorksStepIcon>📱</HowItWorksStepIcon>
-              <HowItWorksStepTitle>Book Online</HowItWorksStepTitle>
-              <HowItWorksStepDescription>
-                Choose your preferred service and time slot through our easy online booking system
-              </HowItWorksStepDescription>
-            </HowItWorksStep>
-            <HowItWorksStep>
-              <HowItWorksStepNumber>02</HowItWorksStepNumber>
-              <HowItWorksStepIcon>👩‍💼</HowItWorksStepIcon>
-              <HowItWorksStepTitle>Expert Consultation</HowItWorksStepTitle>
-              <HowItWorksStepDescription>
-                Our beauty experts will contact you to understand your needs and preferences
-              </HowItWorksStepDescription>
-            </HowItWorksStep>
-            <HowItWorksStep>
-              <HowItWorksStepNumber>03</HowItWorksStepNumber>
-              <HowItWorksStepIcon>🏠</HowItWorksStepIcon>
-              <HowItWorksStepTitle>Home Service</HowItWorksStepTitle>
-              <HowItWorksStepDescription>
-                Our professionals arrive at your location with all necessary equipment and premium products
-              </HowItWorksStepDescription>
-            </HowItWorksStep>
-            <HowItWorksStep>
-              <HowItWorksStepNumber>04</HowItWorksStepNumber>
-              <HowItWorksStepIcon>✨</HowItWorksStepIcon>
-              <HowItWorksStepTitle>Enjoy Results</HowItWorksStepTitle>
-              <HowItWorksStepDescription>
-                Relax and enjoy your premium beauty treatment in the comfort of your own home
-              </HowItWorksStepDescription>
-            </HowItWorksStep>
-          </HowItWorksGrid>
-        </HowItWorksContainer>
-      </HowItWorksSection>
-      {/* Download Our App Section */}
-      <DownloadAppSection>
-        <DownloadAppContainer>
-          <DownloadAppContent>
-            <DownloadAppText>
-              <DownloadAppTitle>
-                Download Our <span className="gradient-text">Mobile App</span>
-              </DownloadAppTitle>
-              <DownloadAppSubtitle>
-                Book your beauty services on the go with our premium mobile application
-              </DownloadAppSubtitle>
-              <DownloadAppFeatures>
-                <DownloadAppFeature>
-                  <DownloadAppFeatureIcon>📱</DownloadAppFeatureIcon>
-                  <DownloadAppFeatureText>Easy Booking</DownloadAppFeatureText>
-                </DownloadAppFeature>
-                <DownloadAppFeature>
-                  <DownloadAppFeatureIcon>💳</DownloadAppFeatureIcon>
-                  <DownloadAppFeatureText>Secure Payments</DownloadAppFeatureText>
-                </DownloadAppFeature>
-                <DownloadAppFeature>
-                  <DownloadAppFeatureIcon>⭐</DownloadAppFeatureIcon>
-                  <DownloadAppFeatureText>Reviews & Ratings</DownloadAppFeatureText>
-                </DownloadAppFeature>
-              </DownloadAppFeatures>
-              <DownloadAppButtons>
-                <DownloadAppButton href="#" className="app-store">
-                  <DownloadAppButtonIcon>🍎</DownloadAppButtonIcon>
-                  <DownloadAppButtonText>
-                    <DownloadAppButtonLabel>Download on the</DownloadAppButtonLabel>
-                    <DownloadAppButtonStore>App Store</DownloadAppButtonStore>
-                  </DownloadAppButtonText>
-                </DownloadAppButton>
-                <DownloadAppButton href="#" className="google-play">
-                  <DownloadAppButtonIcon>🤖</DownloadAppButtonIcon>
-                  <DownloadAppButtonText>
-                    <DownloadAppButtonLabel>Get it on</DownloadAppButtonLabel>
-                    <DownloadAppButtonStore>Google Play</DownloadAppButtonStore>
-                  </DownloadAppButtonText>
-                </DownloadAppButton>
-              </DownloadAppButtons>
-            </DownloadAppText>
-          </DownloadAppContent>
-          <DownloadAppVisual>
-            <DownloadAppPhone>
-              <DownloadAppPhoneImage src="https://source.unsplash.com/300x600/?mobile,phone,app" alt="Saundarya Beauty App" />
-            </DownloadAppPhone>
-          </DownloadAppVisual>
-        </DownloadAppContainer>
-      </DownloadAppSection>
-      {/* Footer Section */}
-      <FooterSection>
-        <FooterContainer>
-          <FooterContent>
-            <FooterColumn>
-              <FooterTitle>Services</FooterTitle>
-              <FooterLinks>
-                <FooterLink href="#">Facial Treatments</FooterLink>
-                <FooterLink href="#">Hair Styling</FooterLink>
-                <FooterLink href="#">Bridal Packages</FooterLink>
-                <FooterLink href="#">Spa Services</FooterLink>
-                <FooterLink href="#">Nail Art</FooterLink>
-              </FooterLinks>
-            </FooterColumn>
-            <FooterColumn>
-              <FooterTitle>Company</FooterTitle>
-              <FooterLinks>
-                <FooterLink href="#">About Us</FooterLink>
-                <FooterLink href="#">Our Team</FooterLink>
-                <FooterLink href="#">Careers</FooterLink>
-                <FooterLink href="#">Press</FooterLink>
-                <FooterLink href="#">Blog</FooterLink>
-              </FooterLinks>
-            </FooterColumn>
-            <FooterColumn>
-              <FooterTitle>Support</FooterTitle>
-              <FooterLinks>
-                <FooterLink href="#">Help Center</FooterLink>
-                <FooterLink href="#">Contact Us</FooterLink>
-                <FooterLink href="#">Privacy Policy</FooterLink>
-                <FooterLink href="#">Terms of Service</FooterLink>
-                <FooterLink href="#">FAQ</FooterLink>
-              </FooterLinks>
-            </FooterColumn>
-            <FooterColumn>
-              <FooterTitle>Contact</FooterTitle>
-              <FooterContact>
-                <FooterContactItem>📞 +1-XXX-XXX-XXXX</FooterContactItem>
-                <FooterContactItem>✉️ info@saundarya.com</FooterContactItem>
-                <FooterContactItem>📍 Mumbai, India</FooterContactItem>
-              </FooterContact>
-              <FooterSocial>
-                <FooterSocialLink href="#">📘</FooterSocialLink>
-                <FooterSocialLink href="#">📷</FooterSocialLink>
-                <FooterSocialLink href="#">🐦</FooterSocialLink>
-                <FooterSocialLink href="#">💼</FooterSocialLink>
-              </FooterSocial>
-            </FooterColumn>
-          </FooterContent>
-          <FooterBottom>
-            <FooterCopyright>
-              © 2024 Saundarya Beauty Studio. All rights reserved.
-            </FooterCopyright>
-            <FooterTrust>
-              <FooterTrustBadge>🔒 Secure Payments</FooterTrustBadge>
-              <FooterTrustBadge>⭐ 4.9/5 Rating</FooterTrustBadge>
-              <FooterTrustBadge>🏆 Award Winning</FooterTrustBadge>
-            </FooterTrust>
-          </FooterBottom>
-        </FooterContainer>
-      </FooterSection>
+      <WrittenTestimonialsPremium />
+      <CallToActionPremium />
     </>
   );
 }
+
+const CarouselWrap = styled.section`
+  padding: 8px 16px 24px;
+  background: #fff;
+`;
+// Carousel legacy styled components removed
+// Removed PromoCarousel legacy components
